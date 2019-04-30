@@ -15,4 +15,4 @@ faq = SimilarityMatchingSkill(save_load_path = './model', train = False)
 agent = DefaultAgent([hello, bye, faq, fallback], skills_selector=HighestConfidenceSelector())
 
 
-start_agent_server(agent, host='0.0.0.0', port=5000, endpoint='/faq')
+start_agent_server(agent, host='0.0.0.0', port=5000, endpoint='/faq', ssl_key='/etc/letsencrypt/live/serg.ml/privkey.pem', ssl_cert='/etc/letsencrypt/live/serg.ml/fullchain.pem')
