@@ -1,3 +1,4 @@
 *.txt
+errors.log
 ngrok
 top_words.py
