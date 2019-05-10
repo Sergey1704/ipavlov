@@ -9,10 +9,13 @@ from deeppavlov.utils.alice import start_agent_server
 
 hello = PatternMatchingSkill(responses=['Добро пожаловать', 'Приветствую тебя, друг мой'], patterns=['Привет', 'Здравствуйте', 'Здравствуй', 'Здорово', 'Ку'], default_confidence = 0.01)
 bye = PatternMatchingSkill(responses=['На этом прощаюсь с тобой', 'Всего доброго'], patterns=['До свидания'])
+help = PatternMatchingSkill(responses=['Вопрос любой задать мне можешь. Мудрый совет постараюсь я дать.'], patterns=['Что ты умеешь', 'Помощь'])
+welcome = PatternMatchingSkill(responses=['Приветствую тебя, друг мой. Вопрос любой задать мне можешь. Мудрый совет постараюсь я дать.'], patterns=[''], default_confidence = 0.01)
 fallback = PatternMatchingSkill(responses=['Мысль свою изложи подробнее, юный падаван'], default_confidence = 0.01)
 faq = SimilarityMatchingSkill(save_load_path = './model', train = False)
 
-agent = DefaultAgent([hello, bye, faq, fallback], skills_selector=HighestConfidenceSelector())
+agent = DefaultAgent([hello, bye, help, welcome, faq, fallback], skills_selector=HighestConfidenceSelector())
 
 
 start_agent_server(agent, host='0.0.0.0', port=5000, endpoint='/faq', ssl_key='/etc/letsencrypt/live/serg.ml/privkey.pem', ssl_cert='/etc/letsencrypt/live/serg.ml/fullchain.pem')
+
